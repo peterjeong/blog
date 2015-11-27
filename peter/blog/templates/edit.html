@@ -1,0 +1,45 @@
+{% extends 'blog_layout.html' %}
+{% load bootstrap3 %}
+
+{% block page_title %}글 수정{% endblock %}
+
+{% block body %}
+<div class="container">
+{% if post %}
+<h3>수정하기</h3>
+<h3 style="text-align:center;">{{ post.title }}</h3>
+<br />
+{% endif %}
+<form method="POST" action="" class="form-horizontal">
+    {% csrf_token %}
+    <div class="form-group form-group-sm">
+        <label class="col-sm-1 control-label">카테고리</label>
+        <div class="col-sm-11">
+        <select name="category" class="form-control input-sm">
+        {% for category in categories %}
+            <option value="{{ category.pk }}"
+            {% if post.category.pk == category.pk %}selected{% endif %}>
+            {{ category.name }}</option>
+        {% endfor %}
+        </select>
+        </div>
+    </div>
+    <p>
+        <div class="form-group form-group-sm">
+            <label class="col-sm-1 control-label">글 제목</label>
+            <div class="col-sm-11">
+            <input type="text" name="title" value="{{ post.title }}" class="form-control" placeholder="글 제목" />
+            </div>
+        </div>
+    </p>
+
+    <p>
+        <textarea name="content" class="form-control" rows="10">{{ post.content }}</textarea>
+    </p>
+
+    <p>
+        {% bootstrap_button "저장" button_type="submit" button_class="btn-primary" %}
+    </p>
+</form>
+</div>
+{% endblock %}

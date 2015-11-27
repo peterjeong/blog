@@ -1,0 +1,15 @@
+{% load bootstrap3 %}
+
+<div class="container">
+		<h3>{{ post.title }}<br />
+			삭제 확인!</h3>
+	<form method="POST" action="">
+	    {% csrf_token %}
+	    <p>
+	        정말로 지우시겠습니까?
+	    </p>
+	    <p>
+	        <input class="btn btn-link" type="submit" value="삭제" />
+	    </p>
+	</form>
+</div>

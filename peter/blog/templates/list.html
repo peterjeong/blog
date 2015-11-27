@@ -1,0 +1,31 @@
+{% extends 'blog_layout.html' %}
+{% load bootstrap3 %}
+
+{% block page_title %}목록{% endblock %}
+
+{% block body %}
+<div style="padding: 20px 50px 20px 50px" class"conteiner-fluid">
+{% for post in posts %}
+    <div class="container">
+        <div align="left" class="post_container">
+            <h3 class="post_title"><a href="{% url 'blog:view_post' post.pk %}">{{ post.title }}</a></h3>
+            
+            <div>
+                <p><span>카테고리: </span>{{ post.category.name }}</p>
+                <p><span>작성일시: </span>{{ post.created_at }}</p>
+            </div>
+
+            <div class="post_content">{{ post.content }}</div>
+            <hr>
+
+        </div>
+    </div>
+{% empty %}
+    <p>글이 하나도 없습니다.</p>
+{% endfor %}
+
+    <div align="center">
+    {% bootstrap_pagination posts %}
+    </div>
+</div>
+{% endblock %}

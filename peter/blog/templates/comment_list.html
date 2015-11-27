@@ -1,0 +1,33 @@
+{% load bootstrap3 %}
+<div class="comments_container">
+    {% for comment in post.comment_set.all %}
+    <div class="comment_container">
+
+        <div class="comment_content">
+            {{ comment.content }}
+        </div>
+
+        <form method="POST" action="{% url 'blog:delete_comment' comment.pk %}" class="pull-right">
+        {% csrf_token %}
+        <button type="submit" class="close" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        </form>
+
+        <p class="clearfix"></p>
+
+        <p style="text-align:right;"><span>작성일자: </span>{{ comment.created_at }}</p>
+
+    </div>
+
+    {% empty %}
+        <p>댓글이 없습니다.</p>
+    {% endfor %}
+
+    <div class="container">
+        <form method="POST" action="{% url 'blog:create_comment' post.pk %}">
+        {% csrf_token %}
+        <p><textarea name="comment" class="form-control" rows="3"></textarea></p>
+        <p style="text-align:right;"><input class="btn btn-default" type="submit" value="댓글남기기" /></p>
+        </form>
+    </div>
+</div>
+
