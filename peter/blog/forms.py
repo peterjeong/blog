@@ -23,6 +23,7 @@ class PostNormalForm(forms.Form):
 	content = forms.CharField(
 		widget=forms.Textarea
 	)
+	category = forms.IntegerField()
 	email = forms.EmailField()
 
 
