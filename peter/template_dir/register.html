@@ -1,0 +1,24 @@
+{% extends 'layout.html' %}
+{% load bootstrap3 %}
+
+{% block title %}회원등록| {% endblock %}
+
+{% block content %}
+<div style="padding: 20px 0px 10px 0px" align="center" class="container">
+<form class="form-horizontal" method="post" action="{% url 'create_user' %}">
+{% csrf_token %}
+<h1 align="center">JOIN</h1>
+<div class="row">
+	<div style="padding: 50px 0px 50px 0px" class="col-sm-12">
+    ID {{ form.username }}
+    EMAIL {{ form.email }}
+    PASSWORD {{ form.password1 }}
+    PASSWORD {{ form.password2 }}
+    </div>
+</div>
+    <input type="submit" class="btn btn-default btn-lg" value="Sign in" />
+    <input type="hidden" name="next" value="{{ next }}" />
+</form>
+</div>
+
+{% endblock %}

@@ -1,7 +1,7 @@
 {% extends 'blog_layout.html' %}
 {% load bootstrap3 %}
 
-{% block page_title %}목록{% endblock %}
+{% block page_title %}글 목록{% endblock %}
 
 {% block body %}
 <div style="padding: 20px 50px 20px 50px" class"conteiner-fluid">
@@ -23,9 +23,17 @@
 {% empty %}
     <p>글이 하나도 없습니다.</p>
 {% endfor %}
-
+    
     <div align="center">
-    {% bootstrap_pagination posts %}
+    {% bootstrap_pagination posts %} <br />
+    <form method="GET" action="{% url 'blog:create_post' %}" class="form-horizontal">
+        {% csrf_token %}
+
+        {{ form.as_p }}
+
+        <p>
+            {% bootstrap_button "글쓰기" button_type="submit" button_class="btn-primary" %}
+        </p>
     </div>
-</div>
+
 {% endblock %}

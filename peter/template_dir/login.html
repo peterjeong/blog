@@ -1,0 +1,35 @@
+{% extends 'layout.html' %}
+{% load bootstrap3 %}
+
+{% block title %}로그인{% endblock %}
+
+{% block content %}
+{% if messages %}
+{% endif %}
+<div style="padding: 20px 0px 10px 0px" align="center" class="container">
+<form class="form-horizontal" method="post" action="{% url 'login_user' %}">
+{% csrf_token %}
+<h1 align="center">LOGIN</h1>
+    {% for message in messages %}
+        <p>{{ message }}</p>
+        <p>로그인 해주세요.</p>
+    {% endfor %}
+<div class="row">
+	<div style="padding: 50px 0px 50px 0px" class="col-sm-12">
+    ID {{ form.username }} PASSWORD {{ form.password }}
+    </div>
+</div>
+    <input type="submit" class="btn btn-default btn-lg" value="login" />
+    <input type="hidden" name="next" value="{{ next }}" />
+</form>
+</div>
+
+
+{% if form.errors %}
+<div align="center">
+    <p>ID와 비밀번호가 일치하지 않습니다.</p>
+</div>
+{% endif %}
+
+
+{% endblock %}
